@@ -1,0 +1,46 @@
+﻿@model Gs.TestingBugManagement.Models.BugManagement
+
+<h4>BugManagement</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BugManagerCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+            <div class="form-group">
+                <label asp-for="BugNumber" class="control-label"></label>
+                <input asp-for="BugNumber" class="form-control" />
+                <span asp-validation-for="BugNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AssignedTo" class="control-label"></label>
+                <input asp-for="AssignedTo" class="form-control" />
+                <span asp-validation-for="AssignedTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BugState" class="control-label"></label>
+                <input asp-for="BugState" class="form-control" />
+                <span asp-validation-for="BugState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script type="text/javascript">
+    clearInterval(timeout);
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
