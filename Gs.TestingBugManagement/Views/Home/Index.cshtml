@@ -1,5 +1,47 @@
-﻿@model IList<BugManagement>
+﻿@model IList<Gs.TestingBugManagement.Models.BugManagement>
 
-<div class="row">
+@{
+    ViewData["Title"] = "View";
+}
 
+<div class="container" style="margin-top: 15px;">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            @if (Model != null)
+            {
+                int cantBySlider = 8;
+                int sliders = (Model.Count / cantBySlider) + (Model.Count % cantBySlider != 0 ? 1 : 0);
+                for (int i = 0, j = 0; i < sliders; i++)
+                {
+                    <div class="item @(i == 0 ? "active": "")">
+                        @for (; j < (cantBySlider * (i + 1)) && j < Model.Count; j++)
+                        {
+                            <div class="col-sm-5 col-md-3">
+                                <div class="thumbnail">
+                                    <div style="display: table; width: 100%;">
+                                        <div style="width:100%;height:25vh;background-color:green;display: table-cell;vertical-align: middle;text-align:center; font-size: 32pt;">
+                                            <p>
+                                                @Html.DisplayFor(modelItem => Model[j].BugNumber)
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="caption">
+                                        <h3>@Html.DisplayFor(modelItem => Model[j].AssignedTo)</h3>
+                                        <h4>@Html.DisplayFor(modelItem => Model[j].BugState)</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            }
+        </div>
+    </div>
 </div>
+
+<script type="text/javascript">
+    var timeout = setTimeout(function () {
+        window.location.href = window.location.href;
+    }, 60000);
+</script>

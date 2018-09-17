@@ -29,7 +29,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Panel</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="View">List</a></li>
                 </ul>
             </div>
         </div>
@@ -39,10 +40,6 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - Gs.TestingBugManagement</p>
-        </footer>
     </div>
 
     <environment include="Development">

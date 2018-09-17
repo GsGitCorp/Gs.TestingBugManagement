@@ -15,6 +15,12 @@ namespace Gs.TestingBugManagement.Controllers
         public IActionResult Index()
         {
             var result = context.BugManagement.ToList();
+            return View(result);
+        }
+
+        public IActionResult View()
+        {
+            var result = context.BugManagement.ToList();
             return View("View", result);
         }
 
