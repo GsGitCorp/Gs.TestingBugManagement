@@ -10,33 +10,12 @@ namespace Gs.TestingBugManagement.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly AppDbContext context = new AppDbContext();
+
         public IActionResult Index()
         {
-
-            var context = IoC.AppDbContext;
-
             var result = context.BugManagement.ToList();
             return View("View", result);
-
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         public IActionResult Create()
@@ -46,40 +25,38 @@ namespace Gs.TestingBugManagement.Controllers
 
         public IActionResult BugManagerCreate(BugManagement bugManagement)
         {
-            IoC.AppDbContext.Add(bugManagement);
-            IoC.AppDbContext.SaveChanges();
-
-            return View("View", IoC.AppDbContext.BugManagement.ToList());
+            context.Add(bugManagement);
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
         {
-            var bugEdit = IoC.AppDbContext.BugManagement.Find(id);
+            var bugEdit = context.BugManagement.Find(id);
 
             return View("BugManagerEdit", bugEdit);
         }
 
         public IActionResult BugManagerEdit(BugManagement bugManagement)
         {
-            var bugEdit = IoC.AppDbContext.BugManagement.Find(bugManagement.BugNumber);
+            var bugEdit = context.BugManagement.Find(bugManagement.BugNumber);
             bugEdit.BugNumber = bugManagement.BugNumber;
             bugEdit.AssignedTo = bugManagement.AssignedTo;
             bugEdit.BugState = bugManagement.BugState;
             bugEdit.CreateDate = bugManagement.CreateDate;
-            IoC.AppDbContext.BugManagement.Update(bugEdit);
-            IoC.AppDbContext.SaveChanges();
+            context.BugManagement.Update(bugEdit);
+            context.SaveChanges();
 
             return View("BugManagerEdit", bugEdit);
         }
 
         public IActionResult Delete(int id)
         {
-            var bugToRemove = IoC.AppDbContext.BugManagement.Find(id);
-            IoC.AppDbContext.BugManagement.Remove(bugToRemove);
-            IoC.AppDbContext.SaveChanges();
+            var bugToRemove = context.BugManagement.Find(id);
+            context.BugManagement.Remove(bugToRemove);
+            context.SaveChanges();
 
-
-            return View("View", IoC.AppDbContext.BugManagement.ToList());
+            return View("View", context.BugManagement.ToList());
         }
 
 

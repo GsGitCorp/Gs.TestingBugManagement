@@ -20,8 +20,9 @@ namespace Gs.TestingBugManagement
 
         public IConfiguration Configuration { get; }
 
+
         // This method gets called by the runtime. Use this method to add services to the container.
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -30,28 +31,16 @@ namespace Gs.TestingBugManagement
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<AppDbContext>(opt =>
-            opt.UseSqlServer("Server=tcp:personalserverhp.database.windows.net,1433;Initial Catalog=GsTestingBugManagement;Persist Security Info=False;User ID=Developer;Password=btjUAV4R;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            return services.BuildServiceProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
-            //IocContainer.Provider = serviceProvider;
-            IoC.AppDbContext = serviceProvider.CreateScope().ServiceProvider.GetRequiredService<AppDbContext>();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
             }
 
             app.UseHttpsRedirection();
