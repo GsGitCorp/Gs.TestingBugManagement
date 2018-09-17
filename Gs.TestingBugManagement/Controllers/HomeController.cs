@@ -33,7 +33,6 @@ namespace Gs.TestingBugManagement.Controllers
         public IActionResult Edit(int id)
         {
             var bugEdit = context.BugManagement.Find(id);
-
             return View("BugManagerEdit", bugEdit);
         }
 

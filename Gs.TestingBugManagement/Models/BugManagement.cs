@@ -18,7 +18,8 @@ namespace Gs.TestingBugManagement.Models
         [MaxLength(50)]
         public string BugState { get; set; }
 
-        [Required]
+        [Required, DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime CreateDate { get; set; }
 
     }
