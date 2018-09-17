@@ -25,12 +25,12 @@
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Testing Managment</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand" style="color: #fff;">Testing Managment</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Panel</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="View">List</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index" style="color: #fff;">Panel</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="View" style="color: #fff;">List</a></li>
                 </ul>
             </div>
         </div>
@@ -38,14 +38,15 @@
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
+    <div class="container body-content" style="height: 85vh;background-color: rgba(255,255,255,0.4);margin-top: 70px;border-radius: 10px;">
         @RenderBody()
     </div>
+
+    <div class=dotted></div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
