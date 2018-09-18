@@ -33,7 +33,7 @@ namespace Gs.TestingBugManagement.Controllers
         {
             context.Add(bugManagement);
             context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("View");
         }
 
         public IActionResult Edit(int id)
@@ -44,7 +44,7 @@ namespace Gs.TestingBugManagement.Controllers
 
         public IActionResult BugManagerEdit(BugManagement bugManagement)
         {
-            var bugEdit = context.BugManagement.Find(bugManagement.BugNumber);
+            var bugEdit = context.BugManagement.Find(bugManagement.BugId);
             bugEdit.BugNumber = bugManagement.BugNumber;
             bugEdit.AssignedTo = bugManagement.AssignedTo;
             bugEdit.BugState = bugManagement.BugState;
@@ -52,7 +52,7 @@ namespace Gs.TestingBugManagement.Controllers
             context.BugManagement.Update(bugEdit);
             context.SaveChanges();
 
-            return View("BugManagerEdit", bugEdit);
+            return RedirectToAction("View");
         }
 
         public IActionResult Delete(int id)
@@ -61,7 +61,7 @@ namespace Gs.TestingBugManagement.Controllers
             context.BugManagement.Remove(bugToRemove);
             context.SaveChanges();
 
-            return View("View", context.BugManagement.ToList());
+            return RedirectToAction("View");
         }
 
 

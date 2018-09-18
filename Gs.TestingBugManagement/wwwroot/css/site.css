@@ -1,10 +1,9 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
 body {
-   
 }
 
-/*.dotted:after {
+    /*.dotted:after {
     background: url("../images/pattern_dot.png") repeat left top rgba(0,0,0,0.5);
     content: "";
     display: block;
@@ -17,7 +16,7 @@ body {
     z-index: -1;
 }*/
 
-/*.dotted:after {
+    /*.dotted:after {
     background-image: -moz-linear-gradient(45deg, #666 25%, transparent 25%), -moz-linear-gradient(-45deg, #666 25%, transparent 25%), -moz-linear-gradient(45deg, transparent 75%, #666 75%), -moz-linear-gradient(-45deg, transparent 75%, #666 75%);
     background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #666), color-stop(.25, transparent)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #666), color-stop(.25, transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, #666)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #666));
     background-image: -webkit-linear-gradient(45deg, #666 25%, transparent 25%), -webkit-linear-gradient(-45deg, #666 25%, transparent 25%), -webkit-linear-gradient(45deg, transparent 75%, #666 75%), -webkit-linear-gradient(-45deg, transparent 75%, #666 75%);
@@ -46,7 +45,9 @@ body {
         right: 0;
         position: absolute;
         z-index: -2;
-        background-color:rgba(0,0,0,0.7)
+        background-color: rgba(0,0,0,0.7);
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 
 /* Wrapping element */
@@ -82,14 +83,9 @@ body {
 
 @media screen and (min-width:1800px) {
     .container {
-        width:95%;
+        width: 95%;
     }
 }
-
-.tableInformation {
-    font-size: 2em !important;
-}
-
 th {
     text-align: center;
     color: #337ab7;
@@ -98,3 +94,54 @@ th {
 td {
     text-align: center;
 }
+
+/*----------------------------------------*/
+
+.table-scroll {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+    height: 100px;
+    background-color: #f7f7f7;
+    border: none;
+}
+
+    .table-scroll tbody {
+        display: block;
+        max-height: 65vh;
+        overflow-y: scroll;
+        width: 100%;
+    }
+
+    .table-scroll thead, tbody tr {
+        text-align: center !important;
+        color: #5f6062;
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        padding: 0px !important;
+        vertical-align: middle;
+    }
+
+
+    .table-scroll thead {
+        width: calc( 100% - 1.1em );
+    }
+
+        .table-scroll thead th {
+            text-align: center !important;
+            background-color: #d2d2d2;
+            font-weight: bold;
+            color: #000;
+            border-top: 1px solid #858d99;
+            vertical-align: middle !important;
+            padding: 8px;
+            word-wrap: break-word;
+        }
+
+
+    .table-scroll > thead > tr > th,
+    .table-scroll > tbody > tr > td {
+       color: #000;
+    }
+

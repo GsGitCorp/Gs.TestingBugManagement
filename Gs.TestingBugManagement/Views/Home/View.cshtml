@@ -4,49 +4,63 @@
     ViewData["Title"] = "View";
 }
 
-<h2>Bugs </h2>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table table-bordered tableInformation">
-    <thead>
-        <tr>
-            <th>
-                N° Bug
-            </th>
-            <th>
-                Assigned To
-            </th>
-            <th>
-                State
-            </th>
-            <th>
-                Create
-            </th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BugNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AssignedTo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BugState)
-                </td>
-                <td>
-                    @item.CreateDate.ToString("dd/MM/yyyy")
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.BugNumber }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.BugNumber })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container-fluid" style="margin-top: 15px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <button asp-action="Create" class="btn btn-warning">Create New</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-scroll">
+                <thead>
+                    <tr>
+                        <th>
+                            N° Bug
+                        </th>
+                        <th>
+                            Assigned To
+                        </th>
+                        <th>
+                            State
+                        </th>
+                        <th>
+                            Create
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BugNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AssignedTo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BugState)
+                            </td>
+                            <td>
+                                @item.CreateDate.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.BugId }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.BugId })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+

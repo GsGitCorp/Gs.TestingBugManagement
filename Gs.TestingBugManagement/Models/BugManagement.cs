@@ -8,6 +8,9 @@ namespace Gs.TestingBugManagement.Models
 
         [Key]
         [Required]
+        public int BugId { get; set; }
+
+        [Required]
         public int BugNumber { get; set; }
 
         [Required]
