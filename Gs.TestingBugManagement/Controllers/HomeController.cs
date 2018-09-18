@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Gs.TestingBugManagement.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Gs.TestingBugManagement.Models;
-using Gs.TestingBugManagement.IOC;
+
 namespace Gs.TestingBugManagement.Controllers
 {
     public class HomeController : Controller
@@ -14,18 +13,22 @@ namespace Gs.TestingBugManagement.Controllers
 
         public IActionResult Index()
         {
-            var result = context.BugManagement.ToList();
-            return View(result);
+            var result = context.BugManagement.Include(b => b.Bug).Include(b => b.Enterprise).Include(b => b.Environment);
+            return View(result.ToList());
         }
 
         public IActionResult View()
         {
-            var result = context.BugManagement.ToList();
+            var result = context.BugManagement.Include(b => b.Bug).Include(b => b.Enterprise).Include(b => b.Environment);
             return View("View", result);
         }
 
+
         public IActionResult Create()
         {
+            ViewData["BugID"] = new SelectList(context.Set<Bug>(), "BugID", "BugState");
+            ViewData["EnterpriseID"] = new SelectList(context.Set<Enterprise>(), "EnterpriseID", "EnterpriseType");
+            ViewData["EnvironmentID"] = new SelectList(context.Set<Environment>(), "EnvironmentID", "EnvironmentType");
             return View("BugManagerCreate");
         }
 
@@ -35,34 +38,47 @@ namespace Gs.TestingBugManagement.Controllers
             context.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        public IActionResult Edit(int id)
+        // GET: BugManagements/Edit/5
+        public ActionResult Edit(int? id)
         {
             var bugEdit = context.BugManagement.Find(id);
+
+            ViewData["BugID"] = new SelectList(context.Set<Bug>(), "BugID", "BugState");
+            ViewData["EnterpriseID"] = new SelectList(context.Set<Enterprise>(), "EnterpriseID", "EnterpriseType");
+            ViewData["EnvironmentID"] = new SelectList(context.Set<Environment>(), "EnvironmentID", "EnvironmentType");
+
             return View("BugManagerEdit", bugEdit);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult BugManagerEdit(BugManagement bugManagement)
         {
-            var bugEdit = context.BugManagement.Find(bugManagement.BugNumber);
-            bugEdit.BugNumber = bugManagement.BugNumber;
-            bugEdit.AssignedTo = bugManagement.AssignedTo;
-            bugEdit.BugState = bugManagement.BugState;
-            bugEdit.CreateDate = bugManagement.CreateDate;
-            context.BugManagement.Update(bugEdit);
-            context.SaveChanges();
+    
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    context.Update(bugManagement);
+                    context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
 
-            return View("BugManagerEdit", bugEdit);
+                    return NotFound();
+
+                }          
+            }
+            return RedirectToAction(nameof(Index));
         }
+            public IActionResult Delete(int id)
+            {
+                var bugToRemove = context.BugManagement.Find(id);
+                context.BugManagement.Remove(bugToRemove);
+                context.SaveChanges();
 
-        public IActionResult Delete(int id)
-        {
-            var bugToRemove = context.BugManagement.Find(id);
-            context.BugManagement.Remove(bugToRemove);
-            context.SaveChanges();
-
-            return View("View", context.BugManagement.ToList());
-        }
+                return View("View", context.BugManagement.ToList());
+            }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

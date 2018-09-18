@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="BugManagerCreate">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="BugNumber" class="control-label"></label>
                 <input asp-for="BugNumber" class="form-control" />
@@ -17,14 +17,21 @@
                 <span asp-validation-for="AssignedTo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BugState" class="control-label"></label>
-                <input asp-for="BugState" class="form-control" />
-                <span asp-validation-for="BugState" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="CreateDate" class="control-label"></label>
                 <input asp-for="CreateDate" class="form-control" />
                 <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EnterpriseID" class="control-label"></label>
+                <select asp-for="EnterpriseID" class="form-control" asp-items="ViewBag.EnterpriseID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="EnvironmentID" class="control-label"></label>
+                <select asp-for="EnvironmentID" class="form-control" asp-items="ViewBag.EnvironmentID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="BugID" class="control-label"></label>
+                <select asp-for="BugID" class="form-control" asp-items="ViewBag.BugID"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

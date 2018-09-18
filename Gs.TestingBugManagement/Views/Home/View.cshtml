@@ -21,12 +21,18 @@
                 State
             </th>
             <th>
-                Create
+                Enterprise
+            </th>
+            <th>
+                Environment
             </th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
+
+     
+
         @foreach (var item in Model)
         {
             <tr>
@@ -37,14 +43,20 @@
                     @Html.DisplayFor(modelItem => item.AssignedTo)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BugState)
+                    @Html.DisplayFor(modelItem => item.Bug.BugState)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Enterprise.EnterpriseType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Environment.EnvironmentType)
                 </td>
                 <td>
                     @item.CreateDate.ToString("dd/MM/yyyy")
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.BugNumber }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.BugNumber })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.BugManagmentId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BugManagmentId })
                 </td>
             </tr>
         }
