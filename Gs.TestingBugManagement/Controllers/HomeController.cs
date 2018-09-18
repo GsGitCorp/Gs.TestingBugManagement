@@ -36,7 +36,7 @@ namespace Gs.TestingBugManagement.Controllers
         {
             context.Add(bugManagement);
             context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("View");
         }
         // GET: BugManagements/Edit/5
         public ActionResult Edit(int? id)
@@ -77,8 +77,8 @@ namespace Gs.TestingBugManagement.Controllers
                 context.BugManagement.Remove(bugToRemove);
                 context.SaveChanges();
 
-                return View("View", context.BugManagement.ToList());
-            }
+            return RedirectToAction("View");
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
